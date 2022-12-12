@@ -12,14 +12,22 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                              sidebarPanel(
                                  h3("Project Name: E-Commerce Data Scrapping and Analysis"),
                                  p("Final Term Project"),
-                                 p("Introduction to Data Science [B]")
+                                 p("Introduction to Data Science [B]"),
+                                 uiOutput("datasource"),
+                                 uiOutput("github")
                              ),
                              mainPanel(
                                  h1("Project Overview"),
                                  textOutput("poverview"),
                                  br(),
                                  
-                                 
+                                 h1("Solution Design"),
+                                 imageOutput("solution"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 br(),
                                  h1("Collection of data by web scrapping"),
                                  fluidRow(
                                      column(
@@ -31,6 +39,25 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                                      column(
                                          dataTableOutput(outputId = "cleaned_dataset"), width = 12)
                                  ),
+                                 
+                                 br(),
+                                 
+                                 h1("Desriptive Statistics"),
+                                 br(),
+                                 strong("Mean of Price Attribute: "),
+                                 verbatimTextOutput("mprice"),
+                                 
+                                 strong("Mode of Category Attribute: "),
+                                 verbatimTextOutput("mcategory"),
+                                 
+                                 strong("Variance of Price Attribute: "),
+                                 verbatimTextOutput("vprice"),
+                                 
+                                 strong("Standard Deviation of Price Attribute: "),
+                                 verbatimTextOutput("sdprice"),
+                                 
+                                 strong("Quartile of Price Attribute: "),
+                                 verbatimTextOutput("qprice"),
                                  
                              ) # mainPanel
                              
@@ -118,6 +145,44 @@ server <- function(input, output) {
     output$app <- renderPrint({
         cat(paste(readLines("app.R"), collapse="\n"), sep = "\n")
     })
+    
+    output$qprice <- renderPrint({
+        quantile(products$Price)
+    })
+    
+    output$mprice <- renderPrint({
+        meanPrice
+    })
+    
+    output$mcategory <- renderPrint({
+        mode(products$Category)
+    })
+    
+    output$vprice <- renderPrint({
+        var(products$Price)
+    })
+    
+    output$sdprice <- renderPrint({
+        sd(products$Price)
+    })
+    
+    output$solution <- renderImage({
+        # Return a list containing the filename
+        list(src = 'solution.png',
+             contentType = 'image/png')
+    })
+    
+    url <- a("MFFoodMart", href="https://www.mffoodmart.com/")
+    output$datasource <- renderUI({
+        tagList("Data Source: ", url)
+    })
+    
+    url2 <- a("E-Commerce Data Scrapping and Analysis", href="https://github.com/sayedsyfuzzaman/ecommerce-data-scrapping-r")
+    output$github <- renderUI({
+        tagList("Project Github: ", url2)
+    })
+    
+    
 } # server
 
 
