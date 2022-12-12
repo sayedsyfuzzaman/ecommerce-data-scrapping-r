@@ -7,10 +7,10 @@ cln_df <- read.csv('data/cleaned_dataset.csv')
 
 ui <- fluidPage(theme = shinytheme("cosmo"),
                 navbarPage(
-                    "Data Scrapping Project",
+                    "E-Commerce Data Scrapping and Analysis",
                     tabPanel("Overview",
                              sidebarPanel(
-                                 h3("Project Name: Web Scrapping"),
+                                 h3("Project Name: E-Commerce Data Scrapping and Analysis"),
                                  p("Final Term Project"),
                                  p("Introduction to Data Science [B]")
                              ),
