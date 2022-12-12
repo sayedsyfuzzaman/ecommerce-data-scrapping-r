@@ -3,7 +3,6 @@ library(dplyr)
 
 #Bar Chart of Frequency of each Category
 
-install.packages(c("mosaicData", "ggplot2"))
 library(ggplot2) 
 theme_set(theme_bw()) 
 
@@ -39,7 +38,7 @@ ggsave(path = "D:/Classwork/10th Semester/Intro to Data Science/Project", filena
 
 # Maximum price and Minimum Price by Category
 library(dplyr)
-install.packages("tidyr")
+
 library(tidyr)
 maxMinByCategory = products %>% group_by(Category)  %>%
   summarise(maxPrice = max(Price),
@@ -56,7 +55,7 @@ ggsave(path = "D:/Classwork/10th Semester/Intro to Data Science/Project", filena
 
 #Pie Chart of Availability
 
-install.packages("plotrix")
+
 library(plotrix)
 
 pos <- pie3D(table(products$Available), labels = c("Not Available", "Available"), labelrad=1.25)
@@ -64,5 +63,9 @@ pos[1]<- 0.4
 dfFreq <-as.data.frame(table(products$Available)) 
 pie3D(table(products$Available), labels = c(paste(format(round((dfFreq[1,]["Freq"]/sum(dfFreq$Freq))*100, 2), nsmall = 2),"%",sep = ""),paste(format(round((dfFreq[2,]["Freq"]/sum(dfFreq$Freq))*100, 2), nsmall = 2) ,"%",sep = "")), labelrad = 0.8, labelpos=pos, col = hcl.colors(2, "Spectral"))
 legend(x= -1.05,y= 0.7, c("Not Available", "Available"), cex = 0.7, fill = hcl.colors(2, "Spectral"))
+
+png(file = "new.png")
+hist(products$Price,breaks=50)
+dev.off()
 
 

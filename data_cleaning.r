@@ -1,6 +1,4 @@
-setwd("E:/Semesters/Fall 2022-2023/Final/Intro to Data Science/Final Project")
-
-products=read.csv("dataset.csv")
+products=read.csv("data/dataset.csv")
 
 print(products)
 
@@ -24,4 +22,4 @@ products$Available[products$Available == "no"] <- 0
 
 #Exporting the cleaned dataset
 
-write.csv(products, "E:/Semesters/Fall 2022-2023/Final/Intro to Data Science/Final Project/cleaned_dataset.csv", row.names=FALSE)
+write.csv(products, "data/cleaned_dataset.csv", row.names=FALSE)
